@@ -4,8 +4,16 @@ class PeopleController < ApplicationController
 
   # GET /people or /people.json
   def index
-    @active = params[:active].nil? || params[:active] == 'true' ? true : false
-    @people = Person.where(active: @active).paginate(per_page: 50, page: params[:page])
+    if !params[:active].nil?
+      if params[:active] == 'true'
+        @active = true
+      else
+        @active = false
+      end
+    else
+      @active = true
+    end
+    @people = Person.where(active: @active).paginate(per_page: 200, page: params[:page])
   end
 
   # GET /people/1 or /people/1.json

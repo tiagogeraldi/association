@@ -1,5 +1,5 @@
 class Person < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
 
   validates :name, :national_id, presence: true
   validates :national_id, uniqueness: true
