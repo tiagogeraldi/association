@@ -1,0 +1,33 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Debts</h1>
+
+<%= link_to "New debt", new_debt_path %>
+
+<div id="debts">
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Observation</th>
+        <th>Amount</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @debts.each do |debt| %>
+        <tr>
+          <td><%= debt.id %></td>
+          <td><%= debt.person.name %></td>
+          <td><%= debt.observation %></td>
+          <td><%= debt.amount %></td>
+          <td>
+            <%= button_to "Delete", debt, method: :delete, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

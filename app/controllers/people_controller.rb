@@ -4,6 +4,7 @@ class PeopleController < ApplicationController
 
   # GET /people or /people.json
   def index
+    # TODO: please refactor me
     if !params[:active].nil?
       if params[:active] == 'true'
         @active = true
@@ -13,7 +14,24 @@ class PeopleController < ApplicationController
     else
       @active = true
     end
-    @people = Person.where(active: @active).paginate(per_page: 200, page: params[:page])
+
+    @people = Person.where(active: @active).
+      paginate(per_page: 200, page: params[:page])
+
+  end
+
+  # GET /people/search?q=a_name
+  # Returns an HTML for autocomplete
+  def search
+    @people = Person.where(active: true).
+      where("UPPER(name) LIKE ?", "#{params[:q].upcase}%").
+      order(:name).
+      limit(10)
+
+    respond_to do |format|
+      format.html { render :search, layout: false }
+      format.json { render json: @people.to_json }
+    end
   end
 
   # GET /people/1 or /people/1.json

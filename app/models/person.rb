@@ -1,6 +1,8 @@
 class Person < ApplicationRecord
   belongs_to :user, optional: true
 
+  has_many :debts, dependent: :destroy
+
   validates :name, :national_id, presence: true
   validates :national_id, uniqueness: true
   validate :cpf_or_cnpj

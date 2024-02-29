@@ -1,22 +1,27 @@
 <div id="<%= dom_id person %>">
   <p>
-    <strong>Name:</strong>
+    <strong>Nome:</strong>
     <%= person.name %>
   </p>
 
   <p>
-    <strong>Phone number:</strong>
+    <strong>Telefone:</strong>
     <%= person.phone_number %>
   </p>
 
   <p>
-    <strong>National:</strong>
+    <strong>CPF / CNPJ:</strong>
     <%= person.national_id %>
   </p>
 
   <p>
-    <strong>Active:</strong>
+    <strong>Ativo:</strong>
     <%= person.active %>
+  </p>
+
+  <p>
+    <strong>Total de Débitos</strong>
+    <%= person.debts.sum(&:amount) %>
   </p>
 
 </div>

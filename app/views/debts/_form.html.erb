@@ -1,0 +1,36 @@
+<%= form_with(model: debt) do |form| %>
+  <% if debt.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(debt.errors.count, "error") %> prohibited this debt from being saved:</h2>
+
+      <ul>
+        <% debt.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :person_id, style: "display: block" %>
+    <div data-controller="autocomplete" data-autocomplete-url-value="<%= search_people_path %>" role="combobox">
+      <%= form.hidden_field :person_id, data: { autocomplete_target: 'hidden' } %>
+      <%= form.search_field :q, autofocus: true, data: { autocomplete_target: 'input' } %>
+      <ul class="list-group" data-autocomplete-target="results"></ul>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :amount, style: "display: block" %>
+    <%= form.number_field :amount %>
+  </div>
+
+  <div>
+    <%= form.label :observation, style: "display: block" %>
+    <%= form.text_area :observation %>
+  </div>
+
+  <div>
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

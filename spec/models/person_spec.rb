@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Person, type: :model do
   describe 'associations' do
     it { should belong_to(:user).optional }
+    it { should have_many(:debts) }
   end
 
   describe 'validations' do

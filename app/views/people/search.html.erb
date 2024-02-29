@@ -1,0 +1,11 @@
+<% if @people.any? %>
+  <% @people.each do |person| %>
+    <li class="list-group-item" role="option" data-autocomplete-value="<%= person.id %>">
+      <%= person.name %>
+    </li>
+  <% end %>
+<% else %>
+  <li class="list-group-item" role="option">
+    Nenhum resultado encontrado
+  </li>
+<% end %>
