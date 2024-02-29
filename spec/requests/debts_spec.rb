@@ -15,17 +15,34 @@ RSpec.describe "Debts", type: :request do
   describe "POST /debts" do
     let!(:person) { FactoryBot.create :person }
 
-    it "creates a new debt" do
-      expect {
-        post debts_path, params: {
-          debt: {
-            amount: 100,
-            description: "Test Debt",
-            person_id: person.id
+    context "when creating a debt fails" do
+      it "does not create a new debt" do
+        expect {
+          post debts_path, params: {
+            debt: {
+              amount: nil, # Invalid amount
+              description: "Test Debt",
+              person_id: person.id
+            }
           }
-        }
-      }.to change(Debt, :count).by(1)
-      expect(response).to have_http_status(302)
+        }.to_not change(Debt, :count)
+        expect(response).to have_http_status(422) # Unprocessable Entity
+      end
+    end
+
+    context "when creating a debt succeeds" do
+      it "creates a new debt" do
+        expect {
+          post debts_path, params: {
+            debt: {
+              amount: 100,
+              description: "Test Debt",
+              person_id: person.id
+            }
+          }
+        }.to change(Debt, :count).by(1)
+        expect(response).to have_http_status(302)
+      end
     end
   end
 
