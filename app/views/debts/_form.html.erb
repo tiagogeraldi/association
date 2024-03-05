@@ -1,36 +1,49 @@
-<%= form_with(model: debt) do |form| %>
-  <% if debt.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(debt.errors.count, "error") %> prohibited this debt from being saved:</h2>
-
-      <ul>
-        <% debt.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :person_id, style: "display: block" %>
-    <div data-controller="autocomplete" data-autocomplete-url-value="<%= search_people_path %>" role="combobox">
-      <%= form.hidden_field :person_id, data: { autocomplete_target: 'hidden' } %>
-      <%= form.search_field :q, autofocus: true, data: { autocomplete_target: 'input' } %>
-      <ul class="list-group" data-autocomplete-target="results"></ul>
-    </div>
-  </div>
-
-  <div>
-    <%= form.label :amount, style: "display: block" %>
-    <%= form.number_field :amount %>
-  </div>
-
-  <div>
-    <%= form.label :observation, style: "display: block" %>
-    <%= form.text_area :observation %>
-  </div>
-
-  <div>
-    <%= form.submit class: 'btn btn-primary' %>
+<%# TODO: refactor DRY %>
+<% if notice.present? %>
+  <div class="alert alert-success">
+    <%= notice %>
   </div>
 <% end %>
+
+<%= link_to "< Voltar", debts_path, class: 'btn btn-secondary btn-sm' %>
+
+<div class="row mt-4">
+  <div class="col-6">
+    <%= form_with(model: debt) do |form| %>
+      <% if debt.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(debt.errors.count, "error") %> prohibited this debt from being saved:</h2>
+
+          <ul>
+            <% debt.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="mb-3">
+        <%= form.label :person_id, 'Associado', class: 'form-label' %>
+        <div data-controller="autocomplete" data-autocomplete-url-value="<%= search_people_path %>" role="combobox">
+          <%= form.hidden_field :person_id, data: { autocomplete_target: 'hidden' } %>
+          <%= form.search_field :q, autofocus: true, data: { autocomplete_target: 'input' }, class: 'form-control' %>
+          <ul class="list-group" data-autocomplete-target="results"></ul>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :amount, 'Valor', class: 'form-label' %>
+        <%= form.number_field :amount, class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :observation, 'Observação', class: 'form-label' %>
+        <%= form.text_area :observation, class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.submit 'Salvar', class: 'btn btn-primary btn-lg' %>
+      </div>
+    <% end %>
+  </div>
+</div>

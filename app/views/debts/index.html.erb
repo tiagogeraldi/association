@@ -1,8 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<%# TODO: refactor DRY %>
+<% if notice.present? %>
+  <div class="alert alert-success">
+    <%= notice %>
+  </div>
+<% end %>
 
-<h1>Debts</h1>
+<h1>Débitos</h1>
 
-<%= link_to "New debt", new_debt_path %>
+<%= link_to new_debt_path, class: 'btn btn-light btn-sm' do %>
+  <i class="bi bi-plus"></i>
+  Novo débito
+<% end %>
 
 <div id="debts">
 <div class="table-responsive">
@@ -10,10 +18,10 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Observation</th>
-        <th>Amount</th>
-        <th>Actions</th>
+        <th>Associado</th>
+        <th>Observação</th>
+        <th class="text-end">Valor</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -22,9 +30,11 @@
           <td><%= debt.id %></td>
           <td><%= debt.person.name %></td>
           <td><%= debt.observation %></td>
-          <td><%= debt.amount %></td>
-          <td>
-            <%= button_to "Delete", debt, method: :delete, class: "btn btn-danger btn-sm" %>
+          <td class="text-end"><%= debt.amount %></td>
+          <td class="text-end">
+            <%= button_to debt, method: :delete, class: "btn btn-danger btn-sm" do %>
+              <i class="bi bi-trash"></i>
+            <% end %>
           </td>
         </tr>
       <% end %>

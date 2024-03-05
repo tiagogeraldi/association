@@ -1,4 +1,4 @@
-<div id="<%= dom_id person %>">
+<div id="<%= dom_id person %>" class="my-3">
   <p>
     <strong>Nome:</strong>
     <%= person.name %>
@@ -16,7 +16,16 @@
 
   <p>
     <strong>Ativo:</strong>
-    <%= person.active %>
+    <%# TODO: refactor: use a helper method %>
+    <% if @person.active %>
+      <span class="text-success">
+        <i class="bi bi-check-circle"></i>
+      </span>
+    <% else %>
+      <span class="text-danger">
+        <i class="bi bi-x-circle"></i>
+      </span>
+    <% end %>
   </p>
 
   <p>

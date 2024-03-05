@@ -17,7 +17,7 @@ class DebtsController < ApplicationController
 
     respond_to do |format|
       if @debt.save
-        format.html { redirect_to debt_url(@debt), notice: "Debt was successfully created." }
+        format.html { redirect_to debt_url(@debt), notice: "Débito criado." }
         format.json { render :show, status: :created, location: @debt }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -32,7 +32,7 @@ class DebtsController < ApplicationController
     @debt.destroy!
 
     respond_to do |format|
-      format.html { redirect_to debts_url, notice: "Debt was successfully destroyed." }
+      format.html { redirect_to debts_url, notice: "Débito removido." }
       format.json { head :no_content }
     end
   end
