@@ -4,7 +4,7 @@ class PeopleController < ApplicationController
 
   # GET /people or /people.json
   def index
-    # TODO: please refactor me
+    # TODO: ugly code
     if !params[:active].nil?
       if params[:active] == 'true'
         @active = true
@@ -15,9 +15,7 @@ class PeopleController < ApplicationController
       @active = true
     end
 
-    @people = Person.where(active: @active).
-      paginate(per_page: 200, page: params[:page])
-
+    @people = Person.where(active: @active)
   end
 
   # GET /people/search?q=a_name

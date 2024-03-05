@@ -11,7 +11,7 @@
 Person.destroy_all
 User.destroy_all
 
-user = User.create email: 'admin@admin.com', password: '111111'
+User.create email: 'admin@admin.com', password: '111111'
 
 1000.times do
   User.create email: Faker::Internet.email, password: '111111'
