@@ -1,2 +1,12 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+.pagination {
+  padding: 10px 0;
+
+  a, em.current {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #cacaca;
+  }
+}
