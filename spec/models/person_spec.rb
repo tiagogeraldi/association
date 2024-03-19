@@ -25,4 +25,20 @@ RSpec.describe Person, type: :model do
     end
   end
 
+  describe '#total_debts' do
+    it 'returns the sum of all debt amounts' do
+      person = Person.new(name: 'John Doe', national_id: CPF.generate)
+      debt1 = person.debts.build(amount: 100)
+      debt2 = person.debts.build(amount: 200)
+      debt3 = person.debts.build(amount: 300)
+
+      expect(person.total_debts).to eq(-600)
+    end
+
+    it 'returns 0 if there are no debts' do
+      person = Person.new(name: 'John Doe', national_id: CPF.generate)
+
+      expect(person.total_debts).to eq(0)
+    end
+  end
 end

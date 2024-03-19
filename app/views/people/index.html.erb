@@ -32,6 +32,7 @@
       <th>Cadastrado em</th>
       <th>Cadastrado por</th>
       <th>Ativo</th>
+      <th>Débitos</th>
       <th></th>
     </tr>
   </thead>
@@ -54,6 +55,9 @@
               <i class="bi bi-x-circle"></i>
             </span>
           <% end %>
+        </td>
+        <td class="text-end align-middle">
+          <%= person.total_debts %>
         </td>
         <td class="text-center align-middle">
           <div class="btn-group" role="group" aria-label="Actions">
